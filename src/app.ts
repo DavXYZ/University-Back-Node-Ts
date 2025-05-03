@@ -10,7 +10,7 @@ import cookieParser from "cookie-parser";
 import createError from "http-errors";
 import googleAuthRouter from './routes/googleAuth.routes'
 import translationRouter from './routes/translation.routes';
-
+import articleRoutes from './routes/article.routes'
 
 const app = express();
 const server = http.createServer(app);
@@ -46,7 +46,7 @@ app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 app.use("/auth", authRoutes);
 app.use('/auth', googleAuthRouter);
 app.use('/translate', translationRouter);
-
+// app.use("/articles", articleRoutes);
 // Catch 404 errors
 app.use(function (req, res, next) {
   next(createError(404));
