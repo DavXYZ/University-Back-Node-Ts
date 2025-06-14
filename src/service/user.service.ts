@@ -16,10 +16,8 @@ import { verifyEmail } from "../utils/verifyEmail";
 
 const userRepository = AppDataSource.getRepository(User);
 
-export default class UserService {
-
-    static async register(userData: {
-      email: string;
+interface UserData {
+ email: string;
       full_name: string;
       password: string;
       confirm_password: string;
@@ -42,7 +40,11 @@ export default class UserService {
       position?: string;
       level_of_education?: string;
       data_processing_consent:boolean;
-    }) {
+}
+
+export default class UserService {
+
+    static async register(userData: UserData) {
       try {
         const {
           email,
@@ -362,6 +364,20 @@ export default class UserService {
       where: { email }
     })
     return user?true:false;
+  }
+
+  static async getAuthorByEmail(email:string){
+    const user = await userRepository.findOne({
+      where:{email,role:UserRole.AUTHOR}
+    })
+    if(user){
+    return {
+      email:user.email,
+      full_name:user.full_name,
+    }
+    }
+
+    
   }
 
 }

@@ -32,4 +32,6 @@ router.post("/forgot-password", UserController.forgotPassword);
 router.post("/verify-code",UserController.verifyCode)
 router.post("/reset-password", UserController.resetPassword);
 
+router.get('/search-author',UserController.getAuthorByEmail);
+
 export default router;

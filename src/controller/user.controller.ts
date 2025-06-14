@@ -363,6 +363,17 @@ export default class UserController {
     }
   }
 
+  static async getAuthorByEmail(req:Request,res:Response){
+    const {email} = req.query;
+    try {
+      if(email){
+        const user = await UserService.getAuthorByEmail(email.toString());
+        res.status(200).json({message: "Author find successfully",success:true,data:user})
+      }
+    } catch (error) {
+      res.status(400).json({ message: error instanceof Error ? error.message : "An unknown error occurred" });
+    }
+  }
 
 
 }
